@@ -10,6 +10,10 @@ mvn spring-boot:run
 # service starts on http://localhost:8081
 ```
 
+## API docs (Swagger UI)
+- Swagger UI: `http://localhost:8081/swagger-ui.html`
+- OpenAPI JSON: `http://localhost:8081/v3/api-docs`
+
 ## Prerequisites
 - Kafka on `localhost:9092` with topic `order-events` (produced by the order-service)
 - RabbitMQ on `localhost:5672` (queue `order-queue`)
