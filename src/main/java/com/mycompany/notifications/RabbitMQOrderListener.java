@@ -2,6 +2,7 @@ package com.mycompany.notifications;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * RabbitMQOrderListener - Listens to RabbitMQ messages from e-commerce service
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RabbitMQOrderListener {
 
+    @Autowired
+    private NotificationMetrics metrics;
+
     /**
      * Listens to the "order-queue" RabbitMQ queue
      * This method is called automatically when a new message arrives
@@ -23,6 +27,7 @@ public class RabbitMQOrderListener {
      */
     @RabbitListener(queues = "order-queue")
     public void handleOrderEvent(String message) {
+        metrics.incrementRabbit();
         System.out.println("\n🐰 ========================================");
         System.out.println("   📨 Received Order Event from RabbitMQ!");
         System.out.println("========================================\n");
@@ -38,4 +43,3 @@ public class RabbitMQOrderListener {
         // 4. Log the notification
     }
 }
-

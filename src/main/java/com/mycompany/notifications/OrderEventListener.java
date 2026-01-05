@@ -2,6 +2,7 @@ package com.mycompany.notifications;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * OrderEventListener - Listens to Kafka messages from e-commerce service
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderEventListener {
 
+    @Autowired
+    private NotificationMetrics metrics;
+
     /**
      * Listens to the "order-events" Kafka topic
      * This method is called automatically when a new message arrives
@@ -20,6 +24,7 @@ public class OrderEventListener {
      */
     @KafkaListener(topics = "order-events", groupId = "notification-service-group")
     public void handleOrderEvent(String message) {
+        metrics.incrementKafka();
         System.out.println("\n🔔 ========================================");
         System.out.println("   📨 Received Order Event from Kafka!");
         System.out.println("========================================\n");
@@ -35,4 +40,3 @@ public class OrderEventListener {
         // 4. Log the notification
     }
 }
-

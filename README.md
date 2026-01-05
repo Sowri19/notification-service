@@ -14,6 +14,26 @@ mvn spring-boot:run
 - Swagger UI: `http://localhost:8081/swagger-ui.html`
 - OpenAPI JSON: `http://localhost:8081/v3/api-docs`
 
+## Metrics (Prometheus) & Grafana
+- Prometheus scrape target: `http://localhost:8081/actuator/prometheus`
+- Quick run Prometheus + Grafana:
+```bash
+docker run -d --name prometheus -p 9090:9090 \
+  -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+docker run -d --name grafana -p 3000:3000 grafana/grafana-oss:10.3.1
+```
+Prometheus config example:
+```yaml
+global:
+  scrape_interval: 15s
+scrape_configs:
+  - job_name: 'notification-service'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+```
+Grafana UI: `http://localhost:3000` (admin/admin by default). Add Prometheus datasource at `http://host.docker.internal:9090`.
+
 ## Prerequisites
 - Kafka on `localhost:9092` with topic `order-events` (produced by the order-service)
 - RabbitMQ on `localhost:5672` (queue `order-queue`)

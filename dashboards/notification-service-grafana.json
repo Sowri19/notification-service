@@ -1,0 +1,63 @@
+{
+  "title": "Notification Service",
+  "uid": "notification-service",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Kafka Events (rate)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(notification_service_kafka_events_total[5m])",
+          "legendFormat": "kafka events/sec"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "RabbitMQ Events (rate)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(notification_service_rabbit_events_total[5m])",
+          "legendFormat": "rabbit events/sec"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Kafka Events (total)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "notification_service_kafka_events_total"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "RabbitMQ Events (total)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "notification_service_rabbit_events_total"
+        }
+      ]
+    }
+  ]
+}
