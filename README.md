@@ -34,6 +34,10 @@ scrape_configs:
 ```
 Grafana UI: `http://localhost:3000` (admin/admin by default). Add Prometheus datasource at `http://host.docker.internal:9090`.
 
+## Logs with trace correlation (Loki + Promtail)
+- Log file: `logs/notification-service.log` with `traceId`/`spanId` in each line.
+- Promtail config lives in the order-service repo (`loki-promtail-config.yml`) and already includes this log path.
+
 ## Prerequisites
 - Kafka on `localhost:9092` with topic `order-events` (produced by the order-service)
 - RabbitMQ on `localhost:5672` (queue `order-queue`)
