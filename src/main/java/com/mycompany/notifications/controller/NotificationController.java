@@ -1,4 +1,4 @@
-package com.mycompany.notifications;
+package com.mycompany.notifications.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

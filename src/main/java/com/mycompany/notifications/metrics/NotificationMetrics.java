@@ -1,4 +1,4 @@
-package com.mycompany.notifications;
+package com.mycompany.notifications.metrics;
 
 import org.springframework.stereotype.Component;
 import io.micrometer.core.instrument.Counter;
